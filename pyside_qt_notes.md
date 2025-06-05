@@ -121,6 +121,61 @@ class AppMainWindow(QtMainWindow):
 
 1. menus
 To add a menu bar to the main window, you use the menuBar() method of the QMainWindow:The menuBar() method returns a QMenuBar object. If a QMenuBar object doesn’t exist, the menuBar() will create a new  QMenuBar object before returning it. Otherwise, it returns the existing QMenuBar object.
+
 ```python
 menuBarObject = self.menuBar()
+```
+
+2. by default the menuBarObject is empty, to add a menu we use addMenu() method
+
+```python
+file_menuBar = menuBarObject.addMenu("&File") #menuBaMfileMenu
+search_menuBar = menuBarObject.addMenu("&Search") #menuBarSearchMenu
+help_menuBar = menuBarObject.addMenu("&helpMenu") #menuBarHelpMenu
+```
+
+
+3.  add items to the menuBarmenu we use addAction() method from QAction class subItem.  in File MenuBarObjectMenu
+to set a shortcut for an item we use: ``actionName.setShortCut("Ctrl+N")``
+
+```python
+new_action = file_menuBar.addAction('&New') # adding an action to the file_menuBarBar
+new_action.setShortcut("Ctrl+N")
+```
+
+
+4. Trigger a function and connect to a function
+```python
+quit_action.triggered.connect(self.quit_app)
+def quit_app(self):
+    self.app.quit()
+
+
+new_action.triggered.connect(self.new_file)
+def new_file(self):
+    print("Print new File")
+
+```
+
+5. adding toolbar
+```python
+maintoolbar = QtoolBar("main_toolbar")
+```
+
+6. adding a toolbarfunction/Item to ``main_toolbar``
+```python
+toolbar.addAction(new_action)
+```
+the following will execute the new_file function 
+
+7. Defining a new action using ``QAction``
+```python
+defengingToolBarItem = QAction("Defend", self)
+defengingToolBarItem.setStatusTip("Defending")
+defengingToolBarItem.triggered.connect(self.defending)
+main_toolbar.addAction(defengingToolBarItem)
+
+
+def defending(self):
+    print("Hello I am defending")
 ```
